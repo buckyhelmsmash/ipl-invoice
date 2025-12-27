@@ -4,6 +4,9 @@ const handler = {
   send(channel: string, value: unknown) {
     ipcRenderer.send(channel, value)
   },
+  async invoke(channel: string, value: unknown): Promise<unknown> {
+    return await ipcRenderer.invoke(channel, value)
+  },
   on(channel: string, callback: (...args: unknown[]) => void) {
     const subscription = (_event: IpcRendererEvent, ...args: unknown[]) =>
       callback(...args)
